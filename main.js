@@ -67,9 +67,9 @@ var mySwiper = new Swiper ('.swiper-container', {
   },
   on: {
     init: function () {
-      var totalSlides = this.slides.length;
+      var totalSlides = $(".swiper-pagination-bullet").length;
       console.log("swiper" + this.slides.length);
-      document.querySelector('.total-slides').innerHTML = Math.ceil($(".swiper-slide").length / 2 + 1);
+      document.querySelector('.total-slides').innerHTML = totalSlides;
 
     },
     slideChange: function(){

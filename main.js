@@ -1,5 +1,5 @@
 function changeNavBar(namespace){
-/* check if navbar exists (to avoid js console errors) */
+/*  check if navbar exists (to avoid js console errors) */
 let exists = $( ".navbar" ).length ? true : false;
 /* if user scroll add active class */
 if(namespace != "home"){

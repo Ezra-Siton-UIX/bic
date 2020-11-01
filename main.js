@@ -1,8 +1,6 @@
 /*
     https://github.com/Ezra-Siton-UIX/bic/blob/main/main.js
     */
-
-
 $('.w-nav-menu').on('click', 'a', function() {
   /*
   if ($('.w--open').length === 1){ // detect whether menu is open in mobile view
@@ -95,7 +93,6 @@ function loadSwiper(){
 
   }/* end function */
 
-
 function accessibleTooltip(){
   $(".dropdown-content").attr("aria-hidden","true");
   $(".dropbtn").focus(function(){
@@ -140,7 +137,7 @@ function setActiveState(namespace){
     }
   }
   if(namespace == "home"){
-    console.log();
+    $(`.mobile-link`).removeClass("active");
     $("[data-home]").addClass("w--current");
   }
 }
@@ -157,7 +154,12 @@ const leave_Home = (data) => {
     .from(".arrow-icon-stroke", { rotate: "180",duration: 0.4, ease:Quart.ease }, 0.6) 
   /* other animations */
     .to("[data-anime]", { opacity: 0, duration: 0.3, ease:Quart.easeIn }, 0)
-    .set(".mobile-strip-menu", { y: -100, duration: 0, ease:Quart.easeOut}, 0)
+  /* mobile tab menu */
+    .to(".mobile-strip-menu", { background: "transparent", duration: 0.3, ease:Quart.easeOut}, 1)
+    .to(".line-divder", { background: "#010E16", duration: 0.3, ease:Quart.easeOut}, 0)
+    .to(".mobile-link", { color: "#0091ff", duration: 0.2}, 0.2)
+
+
     .to(".w-nav-button", { color: "#010E16"}, 0) 
     .to("a.w-nav-link", { color: "#010E16"}, 0)
     .to(".logo_letter", { fill: "#010E16", stagger: 0.15}, 0) 
@@ -179,15 +181,19 @@ const enter_white_from_home = (data) => {
   console.log("enter_white_from_home");
   tl = gsap.timeline({});
   return tl  
-  //   hide mobile strip menu */ 
-    .to(".mobile-strip-menu", { opacity: 1, y: 0, duration: 1, ease:Quart.easeOut}, 0)
+  /* hide mobile strip menu */ 
+  //.from(".mobile-strip-menu",{ opacity: 1, y: -100, duration: 1, ease:Quart.easeOut }, 0)
+    .to(".line-divder", { background: "#010E16", duration: 0.3, ease:Quart.easeOut}, 0)
+
+
+
+
     .to(".menu-button", { color: "#010E16", ease:Quart.easeOut, clearProps: "all"}, 0)
     .to("body", { backgroundColor: "white"}, 0)
     .from(".background-image", { opacity: "0"}, 0)
     .from("[data-anime]", { y: 100, opacity: 0, ease:Quart.easeOut, stagger: 0.08 },0)
+
 }
-
-
 
 // Current page (white page) leave transition */
 const leave_white_to_home = (data) => {
@@ -200,11 +206,15 @@ const leave_white_to_home = (data) => {
     .to(".w-nav-button", { color: "white", ease:Quart.easeIn}, 0.6) 
   //.to("[data-anime]", { y: -50, opacity: 0, stagger: 0.2 }, 0)
     .to(".navbar a.w-nav-link", { color: "white", stagger: 0.10, ease:Quart.easeIn}, 0.15)
-  //   hide mobile strip menu */ 
-    .to(".mobile-strip-menu", { opacity: 0, y: -100, duration: .3, ease:Quart.easeIn}, 0)
+  //   mobile strip menu */ 
+    .to(".mobile-strip-menu",{ background: "transparent", color: "white", duration: 0.3, ease:Quart.easeIn }, 0)
+    .to(".line-divder", { background: "white", duration: 0.3, ease:Quart.easeOut}, 0)
+    .to(".mobile-link", { color: "white", duration: 0.3, ease:Quart.easeOut}, 0.4)
 }
 
-/* GENERAL Functions */
+/* ########################
+     GENERAL Functions 
+###########################*/
 const leave_white_to_white = (data) => {
   console.log("leave_white_to_white");
   tl = gsap.timeline({});
@@ -237,7 +247,16 @@ const changeNavAndArrowOrder = (data) =>
 
 }
 
-/* Global hooks */
+/*#####################
+     Global hooks
+######################*/
+/* analytics.js you can manually send a pageview  */
+barba.hooks.afterEnter(() => {
+  console.log("ga");
+  ga('set', 'page', window.location.pathname);
+  ga('send', 'pageview');
+});
+
 barba.hooks.before((data) => {
   console.log("barba.hooks.before barba.hooks.before barba.hooks.before");
   setActiveState(data.next.namespace);
@@ -246,7 +265,8 @@ barba.hooks.before((data) => {
 });
 
 barba.hooks.once((data) => {
-  console.log("barba.hooks.once((data) barba.hooks.once((data)");
+  ga('set', 'page', window.location.pathname);
+  ga('send', 'pageview');
   changeNavBar(data.next.namespace);
   setActiveState(data.next.namespace);
   changeNavAndArrowOrder();
@@ -273,7 +293,9 @@ barba.hooks.enter(() => {
   changeNavBar();
 });
 
-/* Base hooks */
+/* ########################
+       Base hooks
+###########################*/
 barba.init({
   views: [
     {

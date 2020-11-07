@@ -49,7 +49,7 @@ function loadToolTip(){
 function loadSwiper(){
   <!-- Swiper & Webflow CMS collection - Extra Step - add arrows and pagination html markup by code (Append) -->
   var swiperNodes = "";
-  var pagination = '<div class=swiper-pagination></div>';
+  var pagination = '<div data-anime="data-anime" class=swiper-pagination></div>';
   var swiperNodes = swiperNodes.concat(pagination);
   /* loop throw all swipers on the page */
   $('.swiper-container').each(function( index ) {

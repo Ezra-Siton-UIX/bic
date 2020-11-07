@@ -149,7 +149,7 @@ const leave_Home = (data) => {
   /* invert colors animation */
   return tl
   /* main trick */
-    .to(".arrow-div-homepage", { width: "106%", duration: 0.8, ease:Quart.ease  }, 0) 
+    .to(".arrow-div-homepage", { width: "105.3%", duration: 0.8, ease:Quart.ease  }, 0) 
     .to(".video-wrapper", { opacity: 0, duration: 0.8 }, 0)
     .from(".arrow-icon-stroke", { rotate: "180",duration: 0.4, ease:Quart.ease }, 0.6) 
   /* other animations */

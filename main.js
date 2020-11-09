@@ -303,6 +303,7 @@ barba.init({
       afterEnter(data){
         /*play HERO video */
         tl = gsap.timeline({});
+        tl.set(".line-divder", { background: "white"})
         tl.set("body", { backgroundColor: "#010E16"}) 
         var myVideo = document.getElementsByTagName("video")[0];
         myVideo.play(); 

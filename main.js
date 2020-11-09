@@ -157,7 +157,7 @@ const leave_Home = (data) => {
   /* mobile tab menu */
     .to(".mobile-strip-menu", { background: "transparent", duration: 0.3, ease:Quart.easeOut}, 1)
     .to(".line-divder", { background: "#010E16", duration: 0.3, ease:Quart.easeOut}, 0)
-    .to(".mobile-link", { color: "#0091ff", duration: 0.2}, 0.2)
+    .to(".mobile-link", { color: "black", duration: 0.2}, 0.2)
 
 
     .to(".w-nav-button", { color: "#010E16"}, 0) 

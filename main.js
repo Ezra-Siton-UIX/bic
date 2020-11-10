@@ -278,9 +278,7 @@ function about_us_fixBugOfTeamCardOnVerySmallScreens(){
   $( ".dropbtn" ).hover(
     function() {
       //$(".higher-z").css("z-index", 0)
-      console.log("hoverrrrrrrrrrrrrrrrrrr in");
     }, function() {
-      console.log("hoverrrrrrrrrrrrrrrrrrr out");
       //$(".higher-z").css("z-index", 2)
     }
   );
@@ -305,6 +303,10 @@ barba.init({
         tl = gsap.timeline({});
         tl.set(".line-divder", { background: "white"})
         tl.set("body", { backgroundColor: "#010E16"}) 
+          
+        var mobileVideo = document.getElementsByClassName("mobile-video")[0];
+        mobileVideo.play();           
+          
         var myVideo = document.getElementsByTagName("video")[0];
         myVideo.play(); 
       }

@@ -1,5 +1,5 @@
- /*
-    change 11-11-2020
+/*
+    change 11-11-2020 e
     https://github.com/Ezra-Siton-UIX/bic/blob/main/main.js
     */
   $('.w-nav-menu').on('click', 'a', function() {
@@ -145,7 +145,6 @@
     /* hide mobile strip menu */ 
     //.from(".mobile-strip-menu",{ opacity: 1, y: -100, duration: 1, ease:Quart.easeOut }, 0)
       .to(".line-divder", { background: "#010E16", duration: 0.3, ease:Quart.easeOut}, 0)
-
       .to(".menu-button", { color: "#010E16", ease:Quart.easeOut, duration: 0.3, clearProps: "all"}, 0)
       .to("body", { backgroundColor: "white", duration: 0.3 }, 0)
       .from(".background-image", { opacity: "0", duration: 0.3}, 0)
@@ -159,10 +158,11 @@
     /* invert homepage colors to white, body to dark and resize the arrow div */
     /* MAIN ANIMATION - הכניסה של הפס הכחול לתוך דף הבית */
       .to(".arrow-div-white-pages", { width: "115%", duration: 1, ease:Quart.easeIn}, 0.3)
-      .to(".logo_letter", { fill: "white", stagger: 0.05}, .5) 
-      .to(".w-nav-button", { color: "white", ease:Quart.easeIn}, 0.6) 
+      .to(".logo_letter", { fill: "white", stagger: 0.05}, .5)  
+    /* .w-nav-button - התפריט המבורגר אין אותו באתר */
+    // .to(".w-nav-button", { color: "white", stagger: 0.05, ease:Quart.easeIn }, 0.7) 
     //.to("[data-anime]", { y: -50, opacity: 0, stagger: 0.2 }, 0)
-      .to(".navbar a.w-nav-link", { color: "white", stagger: 0.10, ease:Quart.easeIn}, 0.15)
+      .to(".navbar a.w-nav-link", { color: "white", stagger: 0.15, ease:Quart.easeIn}, 0.35)
     //   mobile strip menu */ 
       .to(".mobile-strip-menu",{ background: "transparent", color: "white", duration: 0.3, ease:Quart.easeIn }, 0)
       .to(".line-divder", { background: "white", duration: 0.3, ease:Quart.easeOut}, 0)
@@ -196,6 +196,7 @@
     return tl
       .to("[line-anim]", {duration: 1, width: "60px", background: "white", repeat: -1, yoyo: true})
   }
+
 
   /*#####################
      Global hooks

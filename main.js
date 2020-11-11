@@ -1,4 +1,5 @@
 /*
+    change 11-11-2020
     https://github.com/Ezra-Siton-UIX/bic/blob/main/main.js
     */
 $('.w-nav-menu').on('click', 'a', function() {

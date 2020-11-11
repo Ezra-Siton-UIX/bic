@@ -1,5 +1,5 @@
 /*
-    change 11-11-2020 e
+    change 11-11-2020
     https://github.com/Ezra-Siton-UIX/bic/blob/main/main.js
     */
   $('.w-nav-menu').on('click', 'a', function() {
@@ -114,11 +114,11 @@
     /* main trick */
       .to(".arrow-div-homepage", { width: "105%", duration: 0.8, ease:Quart.ease  }, 0) 
       .to(".video-wrapper", { opacity: 0, duration: 0.8 }, 0)
-      .from(".arrow-icon-stroke", { rotate: "180",duration: 0.4, ease:Quart.ease }, 0.55) 
+      .from(".arrow-icon-stroke", { rotate: "180",duration: 0.4, ease:Quart.ease }, 0.4) 
     /* other animations */
       .to("[data-anime]", { opacity: 0, duration: 0.3, ease:Quart.easeIn }, 0)
     /* mobile tab menu */
-      .to(".mobile-strip-menu", { background: "transparent", duration: 0.3, ease:Quart.easeOut}, 0.7)
+      .to(".mobile-strip-menu", { background: "transparent", duration: 0.3, ease:Quart.easeOut}, 0.5)
       .to(".line-divder", { background: "#010E16", duration: 0.3, ease:Quart.easeOut}, 0)
       .to(".mobile-link", { color: "black", duration: 0.2}, 0.2)
 
@@ -144,11 +144,12 @@
     return tl  
     /* hide mobile strip menu */ 
     //.from(".mobile-strip-menu",{ opacity: 1, y: -100, duration: 1, ease:Quart.easeOut }, 0)
-      .to(".line-divder", { background: "#010E16", duration: 0.3, ease:Quart.easeOut}, 0)
-      .to(".menu-button", { color: "#010E16", ease:Quart.easeOut, duration: 0.3, clearProps: "all"}, 0)
-      .to("body", { backgroundColor: "white", duration: 0.3 }, 0)
-      .from(".background-image", { opacity: "0", duration: 0.3}, 0)
-      .from("[data-anime]", { y: 100, opacity: 0, ease:Quart.easeOut, stagger: 0.09 },0);
+      .to(".line-divder", { background: "#010E16", duration: 0.1, ease:Quart.easeOut}, 0)
+    /* .menu-button = כפתור המבורגר אין באתר */
+    //.to(".menu-button", { color: "#010E16", ease:Quart.easeOut, duration: 0.2, clearProps: "all"}, 0)
+      .to("body", { backgroundColor: "white", duration: 0.1 }, 0)
+      .from(".background-image", { opacity: "0", ease:Quart.easeIn,duration: 0.4}, 0)
+      .from("[data-anime]", { y: 70, opacity: 0, ease:Quart.easeOut, stagger: 0.08 },0);
   }
 
   // Current page (white page) leave transition */
@@ -162,7 +163,7 @@
     /* .w-nav-button - התפריט המבורגר אין אותו באתר */
     // .to(".w-nav-button", { color: "white", stagger: 0.05, ease:Quart.easeIn }, 0.7) 
     //.to("[data-anime]", { y: -50, opacity: 0, stagger: 0.2 }, 0)
-      .to(".navbar a.w-nav-link", { color: "white", stagger: 0.15, ease:Quart.easeIn}, 0.35)
+      .to(".navbar a.w-nav-link", { color: "white", stagger: 0.15, ease:Quart.easeIn}, 0.45)
     //   mobile strip menu */ 
       .to(".mobile-strip-menu",{ background: "transparent", color: "white", duration: 0.3, ease:Quart.easeIn }, 0)
       .to(".line-divder", { background: "white", duration: 0.3, ease:Quart.easeOut}, 0)

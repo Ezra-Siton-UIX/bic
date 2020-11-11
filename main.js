@@ -160,10 +160,10 @@ const enter_white_from_home = (data) => {
   //.from(".mobile-strip-menu",{ opacity: 1, y: -100, duration: 1, ease:Quart.easeOut }, 0)
     .to(".line-divder", { background: "#010E16", duration: 0.3, ease:Quart.easeOut}, 0)
 
-    .to(".menu-button", { color: "#010E16", ease:Quart.easeOut, clearProps: "all"}, 0)
-    .to("body", { backgroundColor: "white"}, 0)
-    .from(".background-image", { opacity: "0"}, 0)
-    .from("[data-anime]", { y: 100, opacity: 0, ease:Quart.easeOut, stagger: 0.08 },0);
+    .to(".menu-button", { color: "#010E16", ease:Quart.easeOut, duration: 0.3, clearProps: "all"}, 0)
+    .to("body", { backgroundColor: "white", duration: 0.3 }, 0)
+    .from(".background-image", { opacity: "0", duration: 0.3}, 0)
+    .from("[data-anime]", { y: 100, opacity: 0, ease:Quart.easeOut, stagger: 0.09 },0);
 }
 
 // Current page (white page) leave transition */

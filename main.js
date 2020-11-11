@@ -54,9 +54,6 @@ function loadSwiper(){
       enabled: true,
     },
     on: {
-      init: function () {
-
-      },
       slideChange: function(){
         var currentSlide = this.realIndex + 1;
         console.log("currentSlide" + currentSlide);
@@ -150,8 +147,7 @@ const enter_home_from_white = (data) => {
   return tl
     .from(".overlay-video", { opacity: 1, duration: 1}, 0)
     .from("[data-anime]", { y: 50, opacity: 0, ease:Quart.easeOut, stagger: 0.05 }, 0)
-    .to("[data-anime]", {color: "white"}, 0)
-
+    .to("[data-anime]", {color: "white"}, 0);
 }
 
 const enter_white_from_home = (data) => {
@@ -166,8 +162,7 @@ const enter_white_from_home = (data) => {
     .to(".menu-button", { color: "#010E16", ease:Quart.easeOut, clearProps: "all"}, 0)
     .to("body", { backgroundColor: "white"}, 0)
     .from(".background-image", { opacity: "0"}, 0)
-    .from("[data-anime]", { y: 100, opacity: 0, ease:Quart.easeOut, stagger: 0.08 },0)
-
+    .from("[data-anime]", { y: 100, opacity: 0, ease:Quart.easeOut, stagger: 0.08 },0);
 }
 
 // Current page (white page) leave transition */
@@ -184,7 +179,7 @@ const leave_white_to_home = (data) => {
   //   mobile strip menu */ 
     .to(".mobile-strip-menu",{ background: "transparent", color: "white", duration: 0.3, ease:Quart.easeIn }, 0)
     .to(".line-divder", { background: "white", duration: 0.3, ease:Quart.easeOut}, 0)
-    .to(".mobile-link", { color: "white", duration: 0.3, ease:Quart.easeOut}, 0.4)
+    .to(".mobile-link", { color: "white", duration: 0.3, ease:Quart.easeOut}, 0.4);
 }
 
 /* ########################

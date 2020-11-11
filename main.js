@@ -342,7 +342,7 @@ barba.init({
         homeLoopAnimation(data);
         tl = gsap.timeline({});
         tl.set("a.w-link", { color: "white", clearProps: "all"}, 0)
-        tl.set(".line-divder", { background: "white"});   
+        tl.set(".line-divder", { background: "white"})
         .from("[data-anime]", { y: 100, opacity: 0, stagger: 0.1, ease: Power3.easeOut}, 0)
       },
       leave:(data) => {

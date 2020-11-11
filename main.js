@@ -25,27 +25,6 @@ function changeNavBar(namespace){
   }
 }
 
-function loadToolTip(){
-  /*
-      console.log("hello tooltip");
-      tippy('#mybutton', {
-        theme: 'light',
-        content: 'Back to main page',
-        placement: 'left-start'
-      })
-      tippy('#swiper-custom-next', {
-        theme: 'light',
-        content: 'Next',
-        placement: 'top'
-      })
-      tippy('#swiper-custom-prev', {
-        theme: 'light',
-        content: 'Prev',
-        placement: 'top'
-      })
-      */
-}
-
 function loadSwiper(){
   <!-- Swiper & Webflow CMS collection - Extra Step - add arrows and pagination html markup by code (Append) -->
   var swiperNodes = "";
@@ -151,14 +130,13 @@ const leave_Home = (data) => {
   /* main trick */
     .to(".arrow-div-homepage", { width: "105%", duration: 0.8, ease:Quart.ease  }, 0) 
     .to(".video-wrapper", { opacity: 0, duration: 0.8 }, 0)
-    .from(".arrow-icon-stroke", { rotate: "180",duration: 0.4, ease:Quart.ease }, 0.6) 
+    .from(".arrow-icon-stroke", { rotate: "180",duration: 0.4, ease:Quart.ease }, 0.55) 
   /* other animations */
     .to("[data-anime]", { opacity: 0, duration: 0.3, ease:Quart.easeIn }, 0)
   /* mobile tab menu */
-    .to(".mobile-strip-menu", { background: "transparent", duration: 0.3, ease:Quart.easeOut}, 1)
+    .to(".mobile-strip-menu", { background: "transparent", duration: 0.3, ease:Quart.easeOut}, 0.7)
     .to(".line-divder", { background: "#010E16", duration: 0.3, ease:Quart.easeOut}, 0)
     .to(".mobile-link", { color: "black", duration: 0.2}, 0.2)
-
 
     .to(".w-nav-button", { color: "#010E16"}, 0) 
     .to("a.w-nav-link", { color: "#010E16"}, 0)
@@ -184,9 +162,6 @@ const enter_white_from_home = (data) => {
   /* hide mobile strip menu */ 
   //.from(".mobile-strip-menu",{ opacity: 1, y: -100, duration: 1, ease:Quart.easeOut }, 0)
     .to(".line-divder", { background: "#010E16", duration: 0.3, ease:Quart.easeOut}, 0)
-
-
-
 
     .to(".menu-button", { color: "#010E16", ease:Quart.easeOut, clearProps: "all"}, 0)
     .to("body", { backgroundColor: "white"}, 0)
@@ -235,17 +210,11 @@ if ('scrollRestoration' in history) {
 
 const homeLoopAnimation = (data) =>
 {
-
   tl = gsap.timeline({});
   return tl
     .to("[line-anim]", {duration: 1, width: "60px", background: "white", repeat: -1, yoyo: true})
-
 }
 
-const changeNavAndArrowOrder = (data) =>
-{
-
-}
 
 /*#####################
      Global hooks
@@ -260,7 +229,6 @@ barba.hooks.afterEnter(() => {
 barba.hooks.before((data) => {
   console.log("barba.hooks.before barba.hooks.before barba.hooks.before");
   setActiveState(data.next.namespace);
-  changeNavAndArrowOrder();
   changeNavBar(data.next.namespace);
 });
 
@@ -269,9 +237,7 @@ barba.hooks.once((data) => {
   ga('send', 'pageview');
   changeNavBar(data.next.namespace);
   setActiveState(data.next.namespace);
-  changeNavAndArrowOrder();
   accessibleTooltip();
-  loadToolTip();
 });
 
 function about_us_fixBugOfTeamCardOnVerySmallScreens(){
@@ -287,7 +253,6 @@ function about_us_fixBugOfTeamCardOnVerySmallScreens(){
 barba.hooks.enter(() => {
   window.scrollTo(0, 0);
   accessibleTooltip();
-  loadToolTip();
   changeNavBar();
 });
 
@@ -301,10 +266,12 @@ barba.init({
       afterEnter(data){
         /*play HERO video */
         tl = gsap.timeline({});
-        tl.set(".line-divder", { background: "white"})
         tl.set("body", { backgroundColor: "#010E16"})   
         var myVideo = document.getElementsByTagName("video")[0];
         myVideo.play(); 
+      },
+      once(data){
+        tl.set(".line-divder", { background: "white"});   
       }
     },
     {
@@ -365,7 +332,7 @@ barba.init({
       }
     },
     {
-      /* to Home to White 
+      /* to Home from White 
                     אנימציית עזיבה של לבן
                     אנימציית כניסה של בית
                     */
@@ -379,7 +346,8 @@ barba.init({
         homeLoopAnimation(data);
         tl = gsap.timeline({});
         tl.set("a.w-link", { color: "white", clearProps: "all"}, 0)
-          .from("[data-anime]", { y: 100, opacity: 0, stagger: 0.1, ease: Power3.easeOut}, 0)
+        tl.set(".line-divder", { background: "white"});   
+        .from("[data-anime]", { y: 100, opacity: 0, stagger: 0.1, ease: Power3.easeOut}, 0)
       },
       leave:(data) => {
         // Current page (white page) leave transition

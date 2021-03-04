@@ -1,13 +1,61 @@
-/*
-    change 11-11-2020
-    https://github.com/Ezra-Siton-UIX/bic/blob/main/main.js
-    */
+<!-- develope by Ezra Siton - Israel -->
+
+<!-- cookies message -->
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+
+<script>
+  window.cookieconsent.initialise({
+    "palette": {
+      "popup": {
+        "background": "#1a173b",
+        "text": "#ffffff"
+      },
+      "button": {
+        "background": "#f00021",
+        "text": "#ffffff"
+      }
+    },
+    "showLink": false,
+    "position": "bottom-right",
+    "content": {
+      "message": "This website uses cookies to ensure you get the best experience on our website.",
+      "dismiss": "Got it"
+    }
+  });
+</script>
+
+<!-- swiper JS  Nov 20 -->
+<script src="https://unpkg.com/swiper@6.3.5/swiper-bundle.min.js"></script>
+
+<!-- Barba Core  Nov 20 -->
+<script src="https://unpkg.com/@barba/core@2.9.7/dist/barba.umd.js"></script>
+
+<!-- GSAP for animation - Nov 20 -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
+
+<!-- Animation Code link -  Nov 20 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Ezra-Siton-UIX/bic@main/main.js"></script>
+-->
+
+<script>
+
+  /* change arrow navbar opacity related to active class */
+  function changeArrowNavbarOpacity(){
+    $(".navbar_right_arrow").css("opacity", 0); 
+    $(".w--current").next(".navbar_right_arrow").css("opacity", 1)  
+  }
+  changeArrowNavbarOpacity();
+
+  /*
+      change 11-11-2020
+      https://github.com/Ezra-Siton-UIX/bic/blob/main/main.js
+      */
   $('.w-nav-menu').on('click', 'a', function() {
     /*
-  if ($('.w--open').length === 1){ // detect whether menu is open in mobile view
-    $('.w-nav-button').triggerHandler('tap');
-  }
-  */
+    if ($('.w--open').length === 1){ // detect whether menu is open in mobile view
+      $('.w-nav-button').triggerHandler('tap');
+    }
+    */
   });
 
 
@@ -122,6 +170,8 @@
       .to(".line-divder", { background: "#010E16", duration: 0.3, ease:Quart.easeOut}, 0)
       .to(".mobile-link", { color: "black", duration: 0.2}, 0.2)
 
+      .to(".sticky-circle", { opacity: 0, duration: 0.2}, 0)
+
       .to(".w-nav-button", { color: "#010E16"}, 0) 
       .to("a.w-nav-link", { color: "#010E16"}, 0)
       .to(".logo_letter", { fill: "#010E16", stagger: 0.15}, 0) 
@@ -133,6 +183,7 @@
     tl = gsap.timeline({});
     return tl
       .from(".overlay-video", { opacity: 1, duration: 1}, 0)
+      .from(".sticky-circle", { opacity: 0, duration: 1.2}, 0.2)
       .from("[data-anime]", { y: 50, opacity: 0, ease:Quart.easeOut, stagger: 0.05 }, 0)
       .to("[data-anime]", {color: "white"}, 0);
   }
@@ -163,16 +214,18 @@
     /* .w-nav-button - התפריט המבורגר אין אותו באתר */
     // .to(".w-nav-button", { color: "white", stagger: 0.05, ease:Quart.easeIn }, 0.7) 
     //.to("[data-anime]", { y: -50, opacity: 0, stagger: 0.2 }, 0)
-      .to(".navbar a.w-nav-link", { color: "white", stagger: 0.15, ease:Quart.easeIn}, 0.45)
+      .to(".navbar a.w-nav-link", { color: "white", stagger: 0.11, ease:Quart.easeIn}, 0.36)
     //   mobile strip menu */ 
       .to(".mobile-strip-menu",{ background: "transparent", color: "white", duration: 0.3, ease:Quart.easeIn }, 0)
       .to(".line-divder", { background: "white", duration: 0.3, ease:Quart.easeOut}, 0)
-      .to(".mobile-link", { color: "white", duration: 0.3, ease:Quart.easeOut}, 0.4);
+      .to(".mobile-link", { color: "white", duration: 0.3, ease:Quart.easeOut}, 0.4)
+    /* navbar small left arrow */
+      .to(".navbar_right_arrow", { opacity: 0, duration: 0.3, ease:Quart.easeOut}, 0.3)   
   }
 
   /* ########################
-     GENERAL Functions 
-###########################*/
+       GENERAL Functions 
+  ###########################*/
   const leave_white_to_white = (data) => {
     console.log("leave_white_to_white");
     tl = gsap.timeline({});
@@ -200,13 +253,12 @@
 
 
   /*#####################
-     Global hooks
-######################*/
+       Global hooks
+  ######################*/
   /* analytics.js you can manually send a pageview  */
   barba.hooks.afterEnter(() => {
-    console.log("ga");
-    ga('set', 'page', window.location.pathname);
-    ga('send', 'pageview');
+    //ga('set', 'page', window.location.pathname);
+    //ga('send', 'pageview');
   });
 
   barba.hooks.before((data) => {
@@ -225,13 +277,14 @@
 
   /* scroll to top */
   barba.hooks.enter(() => {
+    changeArrowNavbarOpacity();
     window.scrollTo(0, 0);
     accessibleTooltip();
   });
 
   /* ########################
-       Base hooks
-###########################*/
+         Base hooks
+  ###########################*/
   barba.init({
     views: [
       {
@@ -252,6 +305,24 @@
         beforeEnter(data){  
           loadSwiper();
         }
+      },
+      {
+        namespace: 'contact',
+        afterEnter(data){  
+          console.log("contact afterEnter afterEnter afterEnter afterEnter afterEnter afterEnter afterEnter");
+          tl = gsap.timeline({});
+          tl.to(".form-not-barba", { opacity: "1", display:'block'}, 0)
+          tl.to(".bici-logo-dark", { opacity: "1", display:'block'}, 0) 
+          tl.to(".bici-logo-dark", { opacity: "0", display:'block'}, 0.3) 
+          /* FIX BUG ISSUE ON CONTACT US FORM */
+          reload();
+        },
+        beforeLeave(data){  
+          console.log("contact beforeLeave beforeLeave beforeLeave beforeLeave beforeLeave beforeLeave beforeLeave");
+          tl = gsap.timeline({});
+          tl.to(".form-not-barba", { opacity: "0", display:'none'}, 0)
+          tl.to(".bici-logo-dark", { opacity: "0", display:'none'}, 0)
+        }   
       }  
     ],
     transitions: [
@@ -274,9 +345,9 @@
       /* HOME PAGE trantisions */
       {
         /* From Home to White 
-                    אנימציית עזיבה של בית
-                    אנימציית כניסה של לבן
-                    */
+                      אנימציית עזיבה של בית
+                      אנימציית כניסה של לבן
+                      */
         name: 'homepage-to-white-transition',
         from: {
           namespace: [
@@ -298,9 +369,9 @@
       },
       {
         /* to Home from White 
-                    אנימציית עזיבה של לבן
-                    אנימציית כניסה של בית
-                    */
+                      אנימציית עזיבה של לבן
+                      אנימציית כניסה של בית
+                      */
         name: 'white-to-home-transition',
         to: {
           namespace: [
@@ -326,3 +397,18 @@
       }
     ]
   });
+
+
+  function reload(){
+    setTimeout(function(){ 
+      if (location.href.indexOf('rel')==-1)
+      {
+      console.log("reload");
+        location.href=location.href+'?rel';
+      }
+      history.replaceState(null, null, ' ');
+    }, 1000);
+    
+
+  }
+</script>

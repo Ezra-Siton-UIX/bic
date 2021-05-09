@@ -1,5 +1,26 @@
 <!-- develope by Ezra Siton - Israel -->
 
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.js"></script>
+<script>
+  // Init fancybox
+  $().fancybox({
+    selector : '.imglist a:visible',
+    hash : "test"
+  });
+
+</script>
+
+<!-- MOuseflow april 21 -->
+<script type="text/javascript">
+  window._mfq = window._mfq || [];
+  (function() {
+    var mf = document.createElement("script");
+    mf.type = "text/javascript"; mf.defer = true;
+    mf.src = "//cdn.mouseflow.com/projects/b3a98d0d-5347-4d8e-9203-cfc19f309f0e.js";
+    document.getElementsByTagName("head")[0].appendChild(mf);
+  })();
+</script>
+
 <!-- cookies message -->
 <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
 
@@ -38,7 +59,6 @@
 -->
 
 <script>
-
   /* change arrow navbar opacity related to active class */
   function changeArrowNavbarOpacity(){
     $(".navbar_right_arrow").css("opacity", 0); 
@@ -58,10 +78,71 @@
     */
   });
 
+  function loadCareersSwiper() {
+
+    if($("[data-card='careers']").length > 3){
+      var swiperNodes = "";
+      var pagination = "<div  class=swiper-pagination></div>";
+      var swiperNodes = swiperNodes.concat(pagination);
+
+      /* loop throw all swipers on the page */
+      $(".swiper-container").each(function (index) {
+        $(this).append(swiperNodes);
+      });
+    }
+
+    const careersSwiper = new Swiper(".swiper-container", {
+      // Optional parameters
+      spaceBetween: 0,
+      slidesPerView: 3,
+      grabCursor: true,
+      loop: false,
+      // Enable lazy loading
+      navigation: {
+        nextEl: ".swiper-custom-next",
+        prevEl: ".swiper-custom-prev",
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      keyboard: {
+        enabled: true,
+      },
+      breakpoints: {
+        0: {
+          /* when window >=0px - webflow mobile landscape/portriat */
+          slidesPerView: 1,
+          spaceBetween: 20,
+          loop: true,
+        },
+        767: {
+          /* when window >= 767px - webflow tablet */ slidesPerView: 2,
+          spaceBetween: 30,
+        },
+        988: {
+          /* when window >= 988px - webflow desktop */ slidesPerView: 3,
+          spaceBetween: 30,
+        },
+      },
+      on: {
+        slideChange: function () {
+          var currentSlide = this.realIndex + 1;
+          console.log("currentSlide" + currentSlide);
+          document.querySelector(".current-slide").innerHTML = currentSlide;
+        },
+        paginationRender: function () {
+          var totalSlides = $(".swiper-pagination-bullet").length;
+          console.log("swiper paginationRender: " + totalSlides);
+          document.querySelector(".total-slides").innerHTML = totalSlides;
+        }
+      }
+    }); 
+  } /* end function swiper carrers */
+
 
   function loadSwiper(){
-    <!-- Swiper & Webflow CMS collection - Extra Step - add arrows and pagination html markup by code (Append) -->
-      var swiperNodes = "";
+    var swiperNodes = "";
     var pagination = '<div  class=swiper-pagination></div>';
     var swiperNodes = swiperNodes.concat(pagination);
     /* loop throw all swipers on the page */
@@ -100,8 +181,7 @@
         }
       }
     })
-
-    }/* end function */
+    }/* end function swiper case studies */
 
   function accessibleTooltip(){
     $(".dropdown-content").attr("aria-hidden","true");
@@ -274,7 +354,6 @@
     accessibleTooltip();
   });
 
-
   /* scroll to top */
   barba.hooks.enter(() => {
     changeArrowNavbarOpacity();
@@ -304,6 +383,21 @@
         namespace: 'case-studies',
         beforeEnter(data){  
           loadSwiper();
+        }
+      },
+      {
+        namespace: 'careers',
+        beforeEnter(data){  
+          /*load swiper on desktop only if more than 3 cards (on mobile always load)*/
+          loadCareersSwiper();
+        }/*end beforeEnter*/
+      },
+      {
+        namespace: 'job',
+        afterEnter(data){  
+          console.log("job afterEnter");
+          /* FIX BUG ISSUE ON CONTACT FORM */
+          reload();
         }
       },
       {
@@ -403,12 +497,12 @@
     setTimeout(function(){ 
       if (location.href.indexOf('rel')==-1)
       {
-      console.log("reload");
+        console.log("reload");
         location.href=location.href+'?rel';
       }
       history.replaceState(null, null, ' ');
     }, 1000);
-    
+
 
   }
 </script>
